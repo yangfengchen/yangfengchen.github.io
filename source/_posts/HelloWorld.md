@@ -1,10 +1,8 @@
 ---
-title: HelloWorld
+title: 搭建hexo博客
 date: 2020-06-06
 tags:
 ---
-
-# 搭建hexo博客
 
 1、准备node.js、git环境
 
