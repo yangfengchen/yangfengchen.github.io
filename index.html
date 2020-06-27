@@ -152,6 +152,110 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yangfengchen.github.io/2020/06/27/gradle-first/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="随风飘雨">
+      <meta itemprop="description" content="学无止境,达者为师。三人行,必有我师。世界不复杂，复杂的是人心；生活本不苦，苦的是欲望太多。菩提本无树，明镜亦非台，本来无一物，何处惹尘埃！人生于世，或顶天，或立地，或功成，或名就，终将卧土长眠。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="随风飘雨">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/27/gradle-first/" class="post-title-link" itemprop="url">gradle初步配置使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-27 17:04:24 / 修改时间：17:31:46" itemprop="dateCreated datePublished" datetime="2020-06-27T17:04:24+08:00">2020-06-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>​    在某篇文章上看到spring boot后续开始使用gradle，心血来潮准备多学一手压身，暂时没有时间翻《gradle实战》，为防止老人痴呆症特此记录。</p>
+<h1 id="1、官网下载gradle"><a href="#1、官网下载gradle" class="headerlink" title="1、官网下载gradle"></a>1、官网下载gradle</h1><p>​    <a href="https://gradle.org/" target="_blank" rel="noopener">https://gradle.org/</a></p>
+<p>​    官网已经有详细的下载安装说明</p>
+<h1 id="2、配置环境变量"><a href="#2、配置环境变量" class="headerlink" title="2、配置环境变量"></a>2、配置环境变量</h1><p>​    GRADLE_HOME: gradle跟目录</p>
+<p>​    PATH:%GRADLE_HOME%\bin</p>
+<p>​    GRADLE_USER_HOME:gradle 下载包目录(个人不喜欢东西放c盘,所以习惯性配置这个，不配置默认在c盘user的某个目录)</p>
+<h1 id="3、idea-使用gradle"><a href="#3、idea-使用gradle" class="headerlink" title="3、idea 使用gradle"></a>3、idea 使用gradle</h1><p>​    settings-&gt;build,execution,deployment-&gt;gradle</p>
+<p>​    3.1、use auto-import //勾选（或者创建项目时勾选），习惯了自动导入添加包</p>
+<p>​    3.2、delegate settings 两个都选择idea//如果不选择，单独建立一个测试main方法运行是提示错误</p>
+<p>​    3.3、service directory path// 设置下载包路径</p>
+<h1 id="4、build-gradle配置"><a href="#4、build-gradle配置" class="headerlink" title="4、build.gradle配置"></a>4、build.gradle配置</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">sourceCompatibility = <span class="number">1.8</span><span class="comment">// source使用的jdk版本</span></span><br><span class="line">targetCompatibility = <span class="number">1.8</span><span class="comment">// 编译时使用的jdk版本或者更新的java虚拟机兼容</span></span><br><span class="line">compileJava.options.encoding = <span class="string">'UTF-8'</span></span><br><span class="line">compileTestJava.options.encoding = <span class="string">'UTF-8'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenLocal()</span><br><span class="line">    maven &#123; url <span class="string">'http://maven.aliyun.com/nexus/content/groups/public/'</span> &#125;</span><br><span class="line">    mavenCentral()</span><br><span class="line">    jcenter()</span><br><span class="line">    maven &#123; url <span class="string">"https://repo.spring.io/snapshot"</span> &#125;</span><br><span class="line">    maven &#123; url <span class="string">"https://repo.spring.io/milestone"</span> &#125;</span><br><span class="line">    maven &#123; url <span class="string">'http://oss.jfrog.org/artifactory/oss-snapshot-local/'</span> &#125;  <span class="comment">//转换pdf使用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile <span class="string">'org.apache.commons:commons-lang3:3.8.1'</span></span><br><span class="line">    compile <span class="string">'com.google.guava:guava:29.0-jre'</span></span><br><span class="line">    testCompile group: <span class="string">'junit'</span>, name: <span class="string">'junit'</span>, version: <span class="string">'4.12'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    mavenLocal()：指定使用maven本地仓库，而本地仓库在配置maven时setting文件指定的仓库位置。gradle查找jar包顺序如下：<code>gradle默认会按以下顺序去查找本地的仓库：USER_HOME/.m2/settings.xml &gt;&gt; M2_HOME/conf/settings.xml &gt;&gt; USER_HOME/.m2/repository。</code> </p>
+<p>mavenCentral()：这是Maven的中央仓库，无需配置，直接声明就可以使用<br>jcenter():JCenter中央仓库，实际也是是用的maven搭建的，但相比Maven仓库更友好，通过CDN分发，并且支持https访问。 </p>
+<p>gradle按配置顺序寻找jar文件。如果本地存在就不会再去下载。不存在的再去maven仓库下载，这里注意下载下来的jar文件不在maven仓库里，而是在gradle的主工作目录下。</p>
+<h1 id="5、扩展知识："><a href="#5、扩展知识：" class="headerlink" title="5、扩展知识："></a>5、扩展知识：</h1><p>1、gradle下载包根目录建立gradle.properties文件，内容如下：</p>
+<p>#开启线程守护，第一次编译时开线程，之后就不会再开了<br>org.gradle.daemon=true<br>#配置编译时的虚拟机大小<br>org.gradle.jvmargs=-Xmx1024m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8<br>#开启并行编译，相当于多条线程再走<br>org.gradle.parallel=true<br>org.gradle.configureondemand=true</p>
+<p>2、依赖第三方包（可以依赖本地包）</p>
+<p><strong>依赖本地包</strong></p>
+<p>compile fileTree(dir:’/lib’,include:[‘*.jar’])</p>
+<p><strong>compile</strong></p>
+<p>从依赖上讲，用compile修饰的配置会传递依赖，而大多数的依赖冲突都是由compile产生的，什么是传递依赖？<br> 打个比方：我们现在有libA，然后libB用compile依赖libA，最后libC依赖libB。那这个时候，libC自然能够使用libA的内容，因为libA的内容跟随这个libB而传递到了libC中。</p>
+<p><strong>api</strong></p>
+<p>api是Gradle4.1(Android studio3.0)新增的依赖方式,其作用于compile基本一致。</p>
+<p>testcompile和androidTestcompile</p>
+<p>这两个依赖项配置和compile是差不多的，也会产生传递依赖，唯一不同的是，testcompile和androidTestcompile不会参与源码打包，只会参与测试包的打包，并且只有在测试模式下启动才会生效，debug和release包不生效。</p>
+<p><strong>debugCompile和releaseCompile</strong></p>
+<ul>
+<li>debugCompile<br> 只在buildType为debug的时候参与打包，release不参与打包，比方说我们的内存泄露检测工具-LeakCanary，其实我们也只是需要在debug模式下打包调试，而发布release版本就需要进行打包了，所以用debugCompile来进行配置</li>
+<li>releaseCompile<br> releaseCompile和debugCompile完全相反，只在release模式下参与打包，应用场景不是很多。</li>
+</ul>
+<p><strong>implementation</strong></p>
+<p>implementation 是Gradle4.1(Android studio3.0)新增的依赖方式，implementation和compile不同，该依赖方式不会产生传递依赖，implementation有点像provided和、debugCompile和releaseCompile的集合体。<br> 来个具体场景，例如：有libA公共库，libB通过implementation依赖libB，然后app无论通过什么方式依赖libB，lib1的依赖都不会传递过来，必须要在app中重新依赖一次。</p>
+<p>如有涉及侵权请及时联系，谢谢~~ QQ：377681869 </p>
+<p>参考网站：</p>
+<p><a href="https://www.cnblogs.com/wangsongbai/p/9206940.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangsongbai/p/9206940.html</a></p>
+<p><a href="https://www.jianshu.com/p/a69daa09a218" target="_blank" rel="noopener">https://www.jianshu.com/p/a69daa09a218</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yangfengchen.github.io/2020/06/06/python-cfda/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -638,14 +742,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
